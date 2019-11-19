@@ -96,13 +96,13 @@ const queryWrapper = function(statement){
     });
 };
 
-router.get('/view/(:id)', authenticationMiddleware(), function(req,res,next){
+router.get('/view/(:id)', function(req,res,next){
 
 // var characterInfo = " + ";SELECT s.name, s.spellEffect FROM characters AS c, knownspells AS k, spells AS s WHERE c.id = " + req.params.id + " AND c.id = k.knownSpell_id And k.spell_id = s.id";
 
     Promise.all([
         queryWrapper('SELECT * FROM characters WHERE id = ' + req.params.id),
-        queryWrapper('SELECT s.name, s.spellEffect FROM characters AS c, knownspells AS k, spells AS s WHERE c.id = ' + req.params.id + ' AND c.id = k.knownSpell_id And k.spell_id = s.id')
+        queryWrapper('SELECT s.name, s.mana, s.spellEffect FROM characters AS c, knownspells AS k, spells AS s WHERE c.id = ' + req.params.id + ' AND c.id = k.knownSpell_id And k.spell_id = s.id')
     ])
     .then(function([characters, spells]){
         res.render('characters/view',{ 
@@ -261,7 +261,30 @@ router.post('/update/:id', authenticationMiddleware(), function(req, res, next){
                     Experience: req.body.Experience,
                     Race: req.body.Race,
                     Age: req.body.Age,
-                    Description: req.body.Description
+                    Description: req.body.Description,
+                    Health: req.body.Health,
+                    Armor: req.body.Armor,
+                    DamReduction: req.body.DamReduction,
+                    Mana: req.body.Mana,
+                    Stamina: req.body.Stamina,
+                    StrScore: req.body.StrScore,
+                    StrMod: req.body.StrMod,
+                    StrDesc: req.body.StrDesc,
+                    DexScore: req.body.DexScore,
+                    DexMod: req.body.DexMod,
+                    DexDesc: req.body.DexDesc,
+                    ConScore: req.body.ConScore,
+                    ConMod: req.body.ConMod,
+                    ConDesc: req.body.ConDesc,
+                    IntScore: req.body.IntScore,
+                    IntMod: req.body.IntMod,
+                    IntDesc: req.body.IntDesc,
+                    WisScore: req.body.WisScore,
+                    WisMod: req.body.WisScore,
+                    WisDesc: req.body.WisDesc,
+                    ChaScore: req.body.ChaScore,
+                    ChaMod: req.body.ChaMod,
+                    ChaDesc: req.body.ChaDesc
                 })
             } else {
                 req.flash('success', 'Data updated!');
@@ -282,7 +305,30 @@ router.post('/update/:id', authenticationMiddleware(), function(req, res, next){
             Experience: req.body.Experience,
             Race: req.body.Race,
             Age: req.body.Age,
-            Description: req.body.Description
+            Description: req.body.Description,
+            Health: req.body.Health,
+            Armor: req.body.Armor,
+            DamReduction: req.body.DamReduction,
+            Mana: req.body.Mana,
+            Stamina: req.body.Stamina,
+            StrScore: req.body.StrScore,
+            StrMod: req.body.StrMod,
+            StrDesc: req.body.StrDesc,
+            DexScore: req.body.DexScore,
+            DexMod: req.body.DexMod,
+            DexDesc: req.body.DexDesc,
+            ConScore: req.body.ConScore,
+            ConMod: req.body.ConMod,
+            ConDesc: req.body.ConDesc,
+            IntScore: req.body.IntScore,
+            IntMod: req.body.IntMod,
+            IntDesc: req.body.IntDesc,
+            WisScore: req.body.WisScore,
+            WisMod: req.body.WisScore,
+            WisDesc: req.body.WisDesc,
+            ChaScore: req.body.ChaScore,
+            ChaMod: req.body.ChaMod,
+            ChaDesc: req.body.ChaDesc
         })
     }
 })
