@@ -1,3 +1,5 @@
+!Dependency directory
+node_modules
+
+!env file
 *.env
-!env.default
-.env.default
