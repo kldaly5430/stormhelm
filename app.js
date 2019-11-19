@@ -48,7 +48,7 @@ var options = {
 var sessionStore = new MySQLStore(options);
 
 app.use(session({
-  secret: 'Fu$e1tztn>Qmg9!',
+  secret: process.env.SSN_SECRET,
   store: sessionStore,
   resave: false,
   saveUninitialized: false,
