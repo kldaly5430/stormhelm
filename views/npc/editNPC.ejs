@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); -%>
+        <header>
+            <%- include('../partials/navigation'); -%>
+        </header>   
+
+    </head>
+    <body>
+        
+        <% if(messages.errors){ %>
+            <p class="alert alert-success mt-4"><%- messages.error %></p>
+        <% } %>
+        <% if(messages.success){ %>
+            <p class="alert alert-success mt-4"><%- messages.success %></p>
+        <% } %>
+
+        <div class="container">
+            <h1>Edit NPC</h1>
+
+            <form action="/npc/update/<%= id %>" method="POST" name="editNPC">
+                <div class="form-row pt-3">
+                    <div class="col-md-6">
+                        <label for="name"><b>Name</b></label>
+                        <input type="text" name="name" id="name" maxlength="25" size="30" class="form-control" value="<%= name %>">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="sex"><b>Sex</b></label>
+                        <select id="sex" name="sex" class="form-control" value="<%= sex %>">
+                            <option value="" selected disabled hidden></option>
+                            <option id="Male" value="Male">Male</option>
+                            <option id="Female" value="Female">Female</option>
+                            <option id="Undefined" value="Undefined">Undefined</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="status"><b>Status</b></label>
+                        <select name="status" id="status" class="form-control"  value="<%= status %>">
+                            <option value="Alive">Alive</option>
+                            <option value="Dead">Dead</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row pt-3">
+                    <div class="col-md-4">
+                        <label for="race"><b>Race</b></label>
+                        <input type="text" name="race" id="race" class="form-control"  value="<%= race %>">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="relationship"><b>Relationship</b></label>
+                        <input type="text" name="relationship" id="relationship" placeholder="Ally, enemy, family, etc..." class="form-control" value="<%= relationship %>">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="roster_npc"><b>On Roster</b></label>
+                        <select name="roster_npc" id="rosterNPC" class="form-control"  value="<%= roster_npc %>">
+                            <option value="" selected hidden disabled></option>
+                            <option value="0">Yes</option>
+                            <option value="1">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row pt-3">
+                    <div class="col-md-4">
+                        <label for="area"><b>Area</b></label>
+                        <textarea name="area" id="inpitArea" rows="2" placeholder="Place they reside in" class="form-control"><%= area %></textarea>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="description"><b>Notes</b></label>
+                        <textarea name="description" id="inputDescription"rows="6" class="form-control"><%= description %></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary float-right mt-5">Update NPC</button>
+
+            </form>
+        </div>
+    </body>
+
+    <script>
+        $(document).ready(function() {sexValue(),statusValue(),rosterValue()});
+
+        function sexValue(){
+            if(document.getElementById("sex").getAttribute("value") == "Male"){
+                document.getElementById("sex").value = "Male";
+            } else if(document.getElementById("sex").getAttribute("value") == "Female"){
+                document.getElementById("sex").value = "Female";
+            } else {
+                document.getElementById("sex").value = "Undefined";
+            }
+        }
+
+        function statusValue(){
+            if(document.getElementById("status").getAttribute("value") == "Alive"){
+                document.getElementById("status").value = "Alive";
+            } else {
+                document.getElementById("status").value = "Dead";
+            }
+        }
+
+        function rosterValue(){
+            if(document.getElementById("rosterNPC").getAttribute("value") == "0"){
+                document.getElementById("rosterNPC").value = "0";
+            } else {
+                document.getElementById("rosterNPC").value = "1";
+            }
+        }
+    </script>
+</html>

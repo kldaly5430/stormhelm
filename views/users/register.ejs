@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); -%>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card card-signin flex-row my-5">
+                        <div class="card-img-left d-none d-md-flex">
+                        <!-- Background image for card set in CSS! -->
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Register</h5>
+                            <!-- Error messaging -->
+                            <% if(locals.errors){ %>
+                                <% for(var i = 0; i < errors.length; i++){ %>
+                                    <div class="alert alert-danger">
+                                        <%= errors[i].msg %>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                            <form action="/register" method="POST" class="form-signin" name="register">
+                                <div class="form-label-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="inputName" class="form-control" name="name" placeholder="Name" required autofocus>
+                                </div>
+                
+                                <div class="form-label-group">
+                                    <label for="userName">Username</label>
+                                    <input type="text" id="inputUserName" class="form-control" name="userName" placeholder="UserName" required>                                    
+                                </div>
+                                
+                                <hr>
+                
+                                <div class="form-label-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>                                    
+                                </div>
+                                
+                                <div class="form-label-group">
+                                    <label for="password2">Confirm password</label>
+                                    <input type="password" id="inputConfirmPassword" class="form-control" name="password2" placeholder="Password" required>                                    
+                                </div>
+                
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase mt-3" type="submit">Register</button>
+                                <a class="d-block text-center mt-2 small" href="#">Sign In</a>
+                                <hr class="my-4">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

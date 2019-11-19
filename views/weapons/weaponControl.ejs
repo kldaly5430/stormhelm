@@ -1,0 +1,48 @@
+<div>
+    <!-- Javascript
+    
+    
+    
+    -->
+    <!-- Add new weapon -->
+
+    <div class="popup-form" id="weaponForm" style="display: none;">
+    <div class="container">
+        <form action="/weapons/weaponControl" method="POST" name="addWeapon">
+            <label for="name"><b>Weapon Name</b></label>
+            <input type="text" name="name" class="form-control" id="name">
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label for="score"><b>Score</b></label>
+                    <input type="text" name="score" class="form-control" id="score">
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="damage"><b>Damage</b></label>
+                    <input type="text" name="damage" class="form-control" id="damage" placeholder="1D6+1">
+                </div>
+            </div>
+            <label for="effect"><b>Effects</b></label>
+            <textarea rows="2" name="effects" class="form-control" id="effects"></textarea>  
+
+            <div class="form-row px-3 pt-3">
+                <button type="submit" class="btn btn-success">Add</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+    </div>
+    
+    <div class="row mx-3 py-3">
+        <button class="btn btn-primary" onclick="openForm()">New Weapon</button>
+    </div>
+
+    <script>
+        function openForm(){
+            document.getElementById("weaponForm").style.display = "block";
+        }
+
+        function closeForm(){
+            document.getElementById("weaponForm").style.display = "none";
+        }
+    </script>
+</div>

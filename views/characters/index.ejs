@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); -%>
+    <header>
+    <%- include('../partials/navigation'); -%>
+    </header>
+
+  </head>
+  <body>
+    
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-9">
+                <h1>Characters</h1>
+            </div>
+            <div class="col-md-3">
+                <a href="/characters/add" type="button" class="btn btn-primary m-3">New Character</a>
+            </div>
+        </div>
+        <br />
+        <div class="container-fluid">
+            <div class="row p-3">
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <% if(data.length){
+
+                    for(var i = 0; i < data.length; i++) {%>
+
+                    <div class="card shadow p-3 mb-5 bg-dark text-white rounded text-center" style="width: 18rem;">
+                        <h2 class="card-title"><%= data[i].Name %></h2>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4">Class: </dt>
+                                <dd class="col-sm-8 text-left"><%= data[i].Class %></dd>
+                                <dt class="col-sm-4">Race: </dt>
+                                <dd class="col-sm-8 text-left"><%= data[i].Race %></dd>
+                                <dt class="col-sm-4">Level: </dt>
+                                <dd class="col-sm-8 text-left"><%= data[i].Level %></dd>
+                            </dl>
+                        <div class="row float-right">
+                            <a href="../characters/view/<%=data[i].id %>" class="d-inline btn btn-primary m-1">View</a>
+                            <a href="../characters/edit/<%=data[i].id %>" class="d-inline btn btn-info m-1">Edit</a>
+                            <a href="../characters/delete/<%=data[i].id %>" class="d-inline btn btn-danger m-1">Delete</a>
+                        </div>
+                        <% } %>
+                    <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

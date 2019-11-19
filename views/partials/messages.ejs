@@ -1,0 +1,14 @@
+<% if(messages.error){ %>
+    <div>
+        <h4 class="alert alert-danger my-0" id="message"><%- messages.error %></h4>
+    </div>
+<% } %>
+<% if(messages.success){ %>
+    <p class="alert alert-success mt-4" id="message"><%- messages.success %></p>
+<% } %>
+
+<script>
+    setTimeout(function() {
+        $("#message").hide("fast");
+    }, 5000);
+</script>

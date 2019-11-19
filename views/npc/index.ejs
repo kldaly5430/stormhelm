@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); -%>
+        <link rel="stylesheet" type="text/css" href="../stylesheets/npc.css" />
+        <header>
+            <%- include('../partials/navigation'); -%>
+        </header>   
+
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="topnav">
+                    <a class="active" href="#type">Race</a>
+                    <a href="#level">Sex</a>
+                    <a href="#mana">Relationship</a>
+                    <a href="#glyph">Roster</a>
+                    <a href="#glyph">Status</a>
+                    <a href="npc/add" role="button" class="btn btn-primary mx-2 mr-2 mt-1 py-2 float-right">Add NPC</a>
+                    <input type="text" placeholder="Search..">
+            </div>
+            <div class="container mt-5">
+
+            <% if(data.length){ %>
+                <% for(var i = 0; i < data.length; i++) {%>
+                    <div class="panel-group"  role="npcList" aria-multiselectable="true">
+                        <div class="panel panel-default" role="tab" id="<%= data[i].id %>">
+                            <div class="row border" id="npcPlate">
+                                <div class="col-3">
+                                    <div class="mx-auto">
+                                        <%= data[i].name %>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="mx-auto">
+                                        <%= data[i].race %>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <%= data[i].status %>
+                                </div>
+                                <div class="col">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_<%= data[i].id %>" onclick="GetRoster(this.id)" id="<%= data[i].id %>" aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="more-less fa fa-angle-down float-right" style="font-size: 1.75em;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="collapse_<%= data[i].id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                        <!-- NPC info -->
+                                    <div class="container" id="npcContent">
+                                        <div class="row">
+                                            <div class="col-6 col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-4 col-xs-6 mx-2">
+                                                        <div class="row">
+                                                            <label><b>Gender:</b></label>
+                                                        </div>
+                                                        <div class="row mx-2">
+                                                            <%= data[i].sex %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 col-xs-6" id="roster_<%= data[i].id %>" value="<%= data[i].roster_npc %>">
+                                                        <div class="row mx-2">
+                                                            <label><b>Roster Member:</b></label>
+                                                        </div>
+                                                        <div class="row mx-4">
+                                                            <p id="rosterType_<%= data[i].id %>"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6">
+                                                        <div>
+                                                            <label><b>Origin/Resides in:</b></label>
+                                                        </div>
+                                                        <div class="mx-4">
+                                                            <%= data[i].area %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 col-sm-6">
+                                                <div class="row">
+                                                    <label><b>Description:</b></label>
+                                                </div>
+                                                <div class="row mx-2">
+                                                    <%= data[i].description %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row-reverse">
+                                                <a href="delete/<%= data[i].id %>" role="button" class="btn btn-outline-danger mt-1 mx-2">Delete</a>
+                                                <a href="npc/edit/<%= data[i].id %>" role="button" class="btn btn-outline-info mt-1">Edit</a>
+                                        </div>                           
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <% } %>
+            <% } %>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        function toggleIcon(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find(".more-less")
+                .toggleClass('fa-angle-down fa-angle-up');
+
+        }
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+
+        function GetRoster(i){
+            if(document.getElementById("roster_" + i).getAttribute("value") == 0){
+                document.getElementById("rosterType_" + i).innerHTML = "Yes";
+            } else {
+                document.getElementById("rosterType" + i).innerHTML = "No";
+            }
+        };
+    </script>
+
+</html>

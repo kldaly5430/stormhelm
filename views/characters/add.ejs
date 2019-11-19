@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); -%>
+        <header>
+            <%- include('../partials/navigation'); -%>
+        </header>   
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1 class="float-left">New Character</h1>
+                <% if (messages.error) { %>
+                <p style="color:red"><%- messages.error %></p>
+                <% } %>
+                <% if (messages.success) { %>
+                    <p style="color: green;"><%- messages.success %></p>
+                <% } %>
+                <div class="container-fluid">
+                    <form action="/characters/add" method="POST" name="addCharacter">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="field">
+                                        <label for="characterName">Name</label>
+                                        <input type="text" name="Name" class="form-control" id="name">
+                                    </div>
+                                    <div class="field">
+                                        <label for="characterClass">Class</label>
+                                        <input type="text" name="Class" class="form-control" id="class">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                                <label for="characterLevel">Level</label>
+                                                <input type="text" name="Level" class="form-control" size="5" id="level">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                                <label for="characterExp">Experience</label>
+                                                <input type="text" name="Experience" class="form-control" id="experience">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="characterRace">Race</label>
+                                            <input type="text" name="Race" class="form-control" id="race">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="characterAge">Age</label>
+                                            <input type="text" name="Age" class="form-control" id="age">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="characterDesc">Description</label>
+                                        <textarea rows="4" name="Description" class="form-control" id="description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="border-width: 5px;">
+
+                            <h2>Attributes</h2>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="health">Health</label>
+                                                    <input type="text" name="Health" class="form-control" id="health">
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="armor">Armor</label>
+                                                        <input type="text" name="Armor" class="form-control" id="armor">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="damReduction">Damage Reduction</label>
+                                                        <input type="text" name="damageReduction" class="form-control" id="damReduction">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="mana">Mana</label>
+                                                        <input type="text" name="Mana" class="form-control" id="mana">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="stamina">Stamina</label>
+                                                        <input type="text" name="Stamina" class="form-control" id="stamina">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-row">
+                                            <table class="table-striped table-bordered">
+                                                <tr>
+                                                    <th colspan="4" style="text-align: center;">Attributes</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="strength">Strength</label></td>
+                                                    <td><input type="text" name="strScore" class="form-control" id="strScore"></td>
+                                                    <td><input type="text" name="strDesc" class="form-control" id="strDesc"></td>
+                                                    <td><input type="text" name="strMod" class="form-control" id="strMod"></td>                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="dexerity">Dexerity</label></td>
+                                                    <td><input type="text" name="dexScore" class="form-control" id="dexScore"></td>
+                                                    <td><input type="text" name="dexDesc" class="form-control" id="dexDesc"></td>
+                                                    <td><input type="text" name="dexMod" class="form-control" id="dexMod"></td>                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="constitution">Constitution</label></td>
+                                                    <td><input type="text" name="conScore" class="form-control" id="conScore"></td>
+                                                    <td><input type="text" name="conDesc" class="form-control" id="conDesc"></td>
+                                                    <td><input type="text" name="conMod" class="form-control" id="conMod"></td>                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="intelligence">Intelligence</label></td>
+                                                    <td><input type="text" name="intScore" class="form-control" id="intScore"></td>
+                                                    <td><input type="text" name="intDesc" class="form-control" id="intDesc"></td>
+                                                    <td><input type="text" name="intMod" class="form-control" id="intMod"></td>                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="wisdom">Wisdom</label></td>
+                                                    <td><input type="text" name="wisScore" class="form-control" id="wisScore"></td>
+                                                    <td><input type="text" name="wisDesc" class="form-control" id="wisDesc"></td>
+                                                    <td><input type="text" name="wisMod" class="form-control" id="wisMod"></td>                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="charisma">Charisma</label></td>
+                                                    <td><input type="text" name="chaScore" class="form-control" id="chaScore"></td>
+                                                    <td><input type="text" name="chaDesc" class="form-control" id="chaDesc"></td>
+                                                    <td><input type="text" name="chaMod" class="form-control" id="chaMod"></td>                                                    
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

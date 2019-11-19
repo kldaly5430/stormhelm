@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); -%>
+    <header>
+        <%- include('../partials/navigation'); -%>
+    </header>
+
+    </head>
+    <body>
+
+        <% if(messages.errors){ %>
+            <p class="alert alert-success mt-4"><%- messages.error %></p>
+        <% } %>
+        <% if(messages.success){ %>
+            <p class="alert alert-success mt-4"><%- messages.success %></p>
+        <% } %>
+
+        <div class="container">
+            <h1>New Spell</h1>
+
+            <form action="/spells/addSpell" method="POST" id="addSpell">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name"><b>Spell Name</b></label>
+                            <input type="text"  name="name" id="name" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="type"><b>Type</b></label>
+                            <select type="text" name="type" id="type" class="form-control">
+                                <option value="" selected disabled hidden></option>
+                                <option value="Arcanomany">Arcanomany</option>
+                                <option value="Wild">Wild</option>
+                                <option value="Divine">Divine</option>
+                                <option value="Necromancy">Necromancy</option>
+                                <option value="Conjuration">Conjuration</option>
+                                <option value="Illusion">Illusion</option>
+                                <option value="Evocation">Evocation</option>
+                                <option value="Fell">Fell</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row"> <!-- Level, manifest, glyph -->
+                        <div class="form-group col-md-4">
+                            <label for="level"><b>Level</b></label>
+                            <input type="text" size="2" name="level" id="level" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="manifest"><b>Manifest</b></label>
+                            <input type="text" name="manifest" id="manifest" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="glyph"><b>Glyph</b></label>
+                            <input type="text" name="glyphs" id="glyph" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row"> <!-- Duration, mana, action -->
+                        <div class="form-group col-md-4">
+                            <label for="duration"><b>Duration</b></label>
+                            <input type="text" name="duration" id="duration" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="mana"><b>Mana</b></label>
+                            <input type="text" name="mana" id="mana" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="action"><b>Action</b></label>
+                            <input type="text" name="action" id="action" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="spellEffect"><b>Spell Effects</b></label>
+                            <textarea rows="3" name="spellEffect" id="spellEffect" class="form-control"></textarea>
+                            <label for="boon"><b>Boon</b></label>
+                            <input type="text" name="boon" id="boon" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-row">
+                                <label for="sevenPlus"><b>7+ Spell Ability</b></label>
+                                <textarea name="sevenPlus" id="sevenPlus" rows="2" class="form-control"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <label for="fivePlus"><b>5+ Spell Ability</b></label>
+                                <textarea name="fivePlus" id="fivePlus" rows="2" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Spell</button>
+            </form>
+        </div>
+
+
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); -%>
+        <link rel='stylesheet' href='/stylesheets/spell.css' />
+    <header>
+        <%- include('../partials/navigation'); -%>
+    </header>
+
+    </head>
+    <body>
+
+        
+
+        <div class="container">
+
+            <div class="topnav">
+                    <a class="active" href="#type">Type</a>
+                    <a href="#level">Level</a>
+                    <a href="#mana">Mana</a>
+                    <a href="glyph">Glyphs</a>
+                    <input type="text" placeholder="Search..">
+            </div>
+
+            <div class="row p-3">                
+                <% if(data.length){
+
+                    for(var i = 0; i < data.length; i++) {%>
+                        
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card bg-dark text-white text-center collapsible" style="width: 300px;">
+                            <h2 class="card-title"><%= data[i].name %></h2>
+                            <div class="card-body text-center">
+                                <h5 class="card-subtitled"><%= data[i].type %></h5>
+                                <div class="content" style="padding: 0 18px; background-color: #f1f1f1; color: black;">
+                                    <dl class="row">
+                                        <dd class="col-md-6"><b>Manifest:</b> <%= data[i].manifest %></dd>
+                                        <dd class="col-md-6"><b>Mana:</b> <%= data[i].mana %></dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dd class="col-md-6"><b>Glyphs:</b> <%= data[i].glyphs %></dd>
+                                        <dd class="col-md-6"><b>Action:</b> <%= data[i].action %></dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dd class="col-md-12"><%= data[i].spellEffect %>
+                                    </dl>
+                                </div>
+                            
+                                <dl class="row">
+                                    <form action="/characters/addSpellToCharacter/<%= charId %>" method="POST" name="addSpellToCharacter">
+                                        <input type="hidden" name="charId" value="<%= charId %>">
+                                        <input type="hidden" name="id" value="<%= data[i].id %>">
+                                        <button type="submit" class="btn btn-light mx-auto">Add Spell</button>
+                                    </form>
+                                    
+                                </dl>
+                            </div>
+                        </div>
+                    </div>                      
+
+                     <% } %>
+                <% } %> 
+            </div>
+        </div>
+
+    </body>
+</html>

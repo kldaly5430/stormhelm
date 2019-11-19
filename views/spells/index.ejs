@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); -%>
+        <link rel='stylesheet' type="text/css" href="/stylesheets/spell.css" />
+    <header>
+        <%- include('../partials/messages'); -%>
+        <%- include('../partials/navigation'); -%>
+    </header>
+
+    </head>
+    <body>
+
+        <div class="container">
+
+            <div class="topnav">
+                    <a class="active" href="#type">Type</a>
+                    <a href="#level">Level</a>
+                    <a href="#mana">Mana</a>
+                    <a href="glyph">Glyphs</a>
+                    <a href="/spells/addSpell" type="button" class="btn btn-primary mx-2 mr-2 float-right">Add Spell</a>
+                    <input type="text" placeholder="Search..">
+            </div>
+
+            <div class="row p-3">                
+                <% if(data.length){
+
+                    for(var i = 0; i < data.length; i++) {%>
+
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                        <button type="button" class="collapsible px-0">
+                            <div class="card bg-secondary text-center" style="width: 275px; height: 250px;">
+                                <img class="card-img-top rounded-circle mx-auto" id="type_<%= data[i].id %>" name="spellImage" src="" value="<%= data[i].type %>" alt="Magic Type Image">
+                                <h2 class="card-title"><%- data[i].name %></h2>
+                                <div class="card-body text-center mt-n3">
+                                    <h5 class="card-subtitled"><%= data[i].type %></h5>
+                                    <dl class="row">                                    
+                                        <dd class="col-md-12"><b>Level:</b> <%= data[i].level %></dd>
+                                        <dd class="col-md-12"><%= data[i].spellEffect %></dd>
+                                    </dl>
+                                </div>
+                            </div>    
+                        </button>
+                        
+                        <div class="content">
+                            <dl class="row">
+                                <dd class="col-md-6"><b>Manifest:</b> <%= data[i].manifest %></dd>
+                                <dd class="col-md-6"><b>Mana:</b> <%= data[i].mana %></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-md-6"><b>Glyphs:</b> <%= data[i].glyphs %></dd>
+                                <dd class="col-md-6"><b>Action:</b> <%= data[i].action %></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-md-12"><b>Boon:</b> <%= data[i].boon %></dd>
+                                <dd class="col-md-12"><b>7+:</b> <%= data[i].sevenPlus %></dd>
+                                <dd class="col-md-12"><b>5+:</b> <%= data[i].fivePlus %></dd>
+                            </dl>
+                            <dl class="row float-right">
+                                <a href="../spells/edit/<%=data[i].id %>" class="d-inline btn btn-info m-1">Edit</a>
+                                <a href="../spells/delete/<%=data[i].id %>" class="d-inline btn btn-danger m-1">Delete</a>
+                            </dl>
+                        </div>                      
+                    </div>
+                     <% } %>
+                <% } %> 
+            </div>
+        </div>
+    </body>
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } 
+                });
+            }
+
+            if( document.readyState !== 'loading' ) {
+                console.log( 'document is already ready, just execute code here' );
+                
+                // myInitCode();
+            } else {
+                document.addEventListener('DOMContentLoaded', function () {
+                    console.log( 'document was not ready, place code here' );
+                    // myInitCode();
+                    GetImage();
+                });
+            }
+
+            function GetImage(){
+            var type = document.getElementsByName("spellImage");
+
+
+            // for(var i = 0; i < type.length+6; i++){
+                // console.log(document.getElementById("type_"+i));
+            //     var image = document.getElementById("type_"+i).getAttribute("value");
+            //     console.log(image);
+            //     if(image == "Wild"){
+            //         document.getElementById("type_"+i).src = "/images/spellImages/wild.png";
+            //     } else if(image == "Divine"){
+            //         document.getElementById("type_"+i).src = "/images/spellImages/divine.png";
+            //     }
+            // }
+        }
+</script>
+
+</html>
