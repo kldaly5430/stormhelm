@@ -24,13 +24,13 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="name"><b>Spell Name</b></label>
-                            <input type="text"  name="name" id="name" class="form-control" value="<%= name %>">
+                            <input type="text"  name="name" id="name" class="form-control" value="<%- name %>">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="type"><b>Type</b></label>
                             <select type="text" name="type" id="type" class="form-control" value="<%= type %>">
                                     <option value="" selected disabled hidden></option>
-                                    <option id="Arcanomany" value="Arcanomany">Arcanomany</option>
+                                    <option id="Arcanomancy" value="Arcanomany">Arcanomancy</option>
                                     <option id="Wild" value="Wild">Wild</option>
                                     <option id="Divine" value="Divine">Divine</option>
                                     <option id="Necromancy" value="Necromancy">Necromancy</option>
@@ -72,7 +72,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="spellEffect"><b>Spell Effects</b></label>
-                            <textarea rows="3" name="spellEffect" id="spellEffect" class="form-control"><%= spellEffect %></textarea>
+                            <textarea rows="5" name="spellEffect" id="spellEffect" class="form-control"><%= spellEffect %></textarea>
                             <label for="boon"><b>Boon</b></label>
                             <input type="text" name="boon" id="boon" class="form-control" value="<%= boon %>">
                         </div>
@@ -92,6 +92,39 @@
             </form>
         </div>
 
+        <script>
+            $(document).ready(function() {GetType()});
+
+            function GetType(){
+                switch(document.getElementById("type").getAttribute("value")){
+                    case "Arcanomany":
+                        document.getElementById("type").value = "Arcanomacy";
+                        break;
+                    case "Wild":
+                        document.getElementById("type").value = "Wild";
+                        break;
+                    case "Divine":
+                        document.getElementById("type").value = "Divine";
+                        break;
+                    case "Conjuration":
+                        document.getElementById("type").value = "Conjuration";
+                        break;
+                    case "Evocation":
+                        document.getElementById("type").value = "Evocation";
+                        break;
+                    case "Fell":
+                        document.getElementById("type").value = "Fell";
+                        break;
+                    case "Illusion":
+                        document.getElementById("type").value = "Illusion";
+                        break;
+                    case "Necromancy":
+                        document.getElementById("type").value = "Necromancy";
+                        break;
+                    default: break;
+                }
+            };
+        </script>
 
     </body>
 </html>

@@ -131,7 +131,7 @@
                             <div class="row mx-3 py-3">
                                 <a href="/characters/addSpellToCharacter/<%= char.id %>" type="button" class="btn btn-info">Add Spell</a>
                             </div>
-            <% }) %>
+
                             <div style="overflow-y: auto;">
                             <% spells.forEach(function(spell){ %>
                                 <div class="panel-group" id="spell" onClick="" role="mySpellList" aria-multiselectable="true">
@@ -188,14 +188,16 @@
                         </ul>
                         <div class="tab-content border" id="abilityContent" >
                             <div class="tab-pane fade show active" id="classAbility" role="tabpanel" aria-labelledby="class-tab">
-                                    
+                                <div class="row mx-3 py-3">
+                                    <a href="/class_abilities/add/<%= char.id %>" type="button" class="btn btn-info">Add Class Ability</a>
+                                </div>
                             </div>
                         </div>
                 </div>
             </div>
         </div>
     </body>
-
+            <% }) %>
     <script>
     	function toggleIcon(e) {
             $(e.target)

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); -%>
+    <header>
+        <%- include('../partials/messages'); -%>
+        <%- include('../partials/navigation'); -%>
+    </header>
+
+    </head>
+    <body>
+
+        <% if(messages.errors){ %>
+            <p class="alert alert-success mt-4"><%- messages.error %></p>
+        <% } %>
+        <% if(messages.success){ %>
+            <p class="alert alert-success mt-4"><%- messages.success %></p>
+        <% } %>
+
+        <div class="container">
+            <h1>New Class Ability</h1>
+
+            <form action="/class_abilities/add" method="POST" id="addClass">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="type"><b>Class Type</b></label>
+                            <select type="text" name="class_type" id="type" class="form-control">
+                                <option value="" selected disabled hidden></option>
+                                <option value="Bard">Bard</option>
+                                <option value="Fighter">Fighter</option>
+                                <option value="Paladin">Paladin</option>
+                                <option value="Ranger">Ranger</option>
+                                <option value="Rogue">Rogue</option>
+                                <option value="Soldier">Soldier</option>
+                                <option value="Warlock">Wizard</option>
+                                <option value="Wizard">Wizard</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="level"><b>Level</b></label>
+                            <select name="level" id="level" class="form-control">
+                                <option value="" selected disabled hidden></option>
+                                <% for(var i = 1;i <= 20; i++){ %>
+                                    <option value="<%= i %>"><%= i %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="name"><b>Class Ability Name</b></label>
+                            <input type="text"  name="class_name" id="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        
+                        <div class="form-group col-md-6">
+                            <label for="manifest"><b>Description</b></label>
+                            <textarea name="description" id="class_Description" rows="4" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <!-- If 'chkFeat' checkbox is check 'featForm' will be unhidden to be filled out -->
+                    <div class="form-row px-4" id="includeFeat">
+                        <input type="checkbox" name="featAbility" id="chkFeat" class="form-check-input">
+                        <label for="feat">Includes class feat</label>
+                    </div>
+                    <!-- 'featForm' will be hidden -->
+                    <div class="form-group" id="featForm" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="feat_name"><b>Ability Name</b></label>
+                                <input type="text" name="feat_name" id="featName" class="form-control">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="action_cost"><b>Action Cost</b></label>
+                                <input type="text" name="action_cost" id="actionCost" class="form-control">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="stamina_cost"><b>Stamina Cost</b></label>
+                                <input type="text" name="stamina_cost" id="staminaCost" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                    <label for="duration"><b>Duration</b></label>
+                                    <input type="text" name="duration" id="duration" class="form-control">
+                                </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="ability_desc"><b>Ability Description</b></label>
+                                <textarea name="ability_desc" id="abilityDesc" rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary float-right">Add Ability</button>
+            </form>
+        </div>
+
+    </body>
+
+    <script>
+        $('input[name=featAbility]').change(function(){
+            if($(this).is(':checked')){
+                document.getElementById("featForm").style.display = "block";
+            } else {
+                document.getElementById("featForm").style.display = "none";
+            }
+        });
+    </script>
+</html>

@@ -59,7 +59,7 @@ router.post('/addSpell', authenticationMiddleware(), function(req, res, next){
 
         connection.query('INSERT INTO spells SET ?', spell, function(err, result){
             if(err){
-                req.flash('error', err)
+                req.flash('error', err);
                 res.render('spells/addSpell', {name: spell.name, type: spell.type, level: spell.level, manifest: spell.manifest, glyphs: spell.glyphs, duration: spell.duration, mana: spell.mana, action: spell.action, spellEffect: spell.spellEffect, boon: spell.boon, sevenPlus: spell.sevenPlus, fivePlus: spell.fivePlus})
             } else {
                 req.flash('success', 'Spell Added');
@@ -68,11 +68,11 @@ router.post('/addSpell', authenticationMiddleware(), function(req, res, next){
         })
     } 
     else {
-        var error_msg = ''
+        var error_msg = '';
         Object.keys(errors).foreach(function(error){
             error_msg += error_msg + '<br>'
         })
-        req.flash('error', error_msg)
+        req.flash('error', error_msg);
 
         res.render('spells/addSpell', {name: req.body.name, type: req.body.type, level: req.body.level, manifest: req.body.manifest, glyphs: req.body.glyphs, duration: req.body.duration, mana: req.body.mana, action: req.body.action, spellEffect: req.body.spellEffect, boon: req.body.boon, sevenPlus: req.body.sevenPlus, fivePlus: req.body.fivePlus})
     }

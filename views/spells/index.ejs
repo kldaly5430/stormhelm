@@ -11,7 +11,7 @@
     </head>
     <body>
 
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="topnav">
                     <a class="active" href="#type">Type</a>
@@ -22,21 +22,22 @@
                     <input type="text" placeholder="Search..">
             </div>
 
-            <div class="row p-3">                
+            <div class="row mx-auto">                
                 <% if(data.length){
 
                     for(var i = 0; i < data.length; i++) {%>
-
-                    <div class="col-sm-12 col-md-6 col-lg-3">
-                        <button type="button" class="collapsible px-0">
-                            <div class="card bg-secondary text-center" style="width: 275px; height: 250px;">
-                                <img class="card-img-top rounded-circle mx-auto" id="type_<%= data[i].id %>" name="spellImage" src="" value="<%= data[i].type %>" alt="Magic Type Image">
+                    <div class="p-1">
+                        <button class="collapsible px-0">
+                            <div class="card text-center" style="width: 300px; height: 340px;">
+                                <img class="card-img-top rounded-circle mx-auto" id="type_<%= i %>" name="spellImage" src="" value="<%= data[i].type %>" alt="Magic Type Image">
                                 <h2 class="card-title"><%- data[i].name %></h2>
-                                <div class="card-body text-center mt-n3">
-                                    <h5 class="card-subtitled"><%= data[i].type %></h5>
+                                <div class="card-body text-center mt-n4">
+                                    <div class="row">
+                                        <h5 class="card-subtitled col-sm-6"><%= data[i].type %></h5>
+                                        <h5 class="col-sm-6"><b>Level:</b> <%= data[i].level %></h5>
+                                    </div>
                                     <dl class="row">                                    
-                                        <dd class="col-md-12"><b>Level:</b> <%= data[i].level %></dd>
-                                        <dd class="col-md-12"><%= data[i].spellEffect %></dd>
+                                        <dd class="col-md-12 align-middle mx-0" id="effect"><%= data[i].spellEffect %></dd>
                                     </dl>
                                 </div>
                             </div>    
@@ -83,33 +84,42 @@
                 });
             }
 
-            if( document.readyState !== 'loading' ) {
-                console.log( 'document is already ready, just execute code here' );
-                
-                // myInitCode();
-            } else {
-                document.addEventListener('DOMContentLoaded', function () {
-                    console.log( 'document was not ready, place code here' );
-                    // myInitCode();
-                    GetImage();
-                });
-            }
+            document.addEventListener('DOMContentLoaded', function () {
+                GetImage();
+
+            });
 
             function GetImage(){
-            var type = document.getElementsByName("spellImage");
+                var type = document.getElementsByName("spellImage");
 
+                for(var i = 0; i < type.length; i++){
+                    var image = document.getElementById("type_"+i).getAttribute("value");
+                    // console.log(image);
+                    if(image == "Wild"){
+                        document.getElementById("type_"+i).src = "/images/spellImages/wild.png";
+                    } else if(image == "Divine"){
+                        document.getElementById("type_"+i).src = "/images/spellImages/divine.png";
+                    }
+                }
+            }
 
-            // for(var i = 0; i < type.length+6; i++){
-                // console.log(document.getElementById("type_"+i));
-            //     var image = document.getElementById("type_"+i).getAttribute("value");
-            //     console.log(image);
-            //     if(image == "Wild"){
-            //         document.getElementById("type_"+i).src = "/images/spellImages/wild.png";
-            //     } else if(image == "Divine"){
-            //         document.getElementById("type_"+i).src = "/images/spellImages/divine.png";
-            //     }
-            // }
-        }
-</script>
+            const getFontSize = (textLength) => {
+                const baseSize = 100
+                if (textLength >= baseSize) {
+                    textLength = baseSize - 70
+                } else {
+                    textLength = baseSize + textLength
+                }
+                const fontSize = baseSize - textLength
+                return `${fontSize}%`
+                }
+
+                const boxes = document.querySelectorAll('#effect')
+                
+                boxes.forEach(box => {
+                box.style.fontSize = getFontSize(box.textContent.length)
+                })
+                
+        </script>
 
 </html>

@@ -17,11 +17,10 @@ router.get('/', function(req, res, next) {
 
 // Route to add page
 router.get('/add', authenticationMiddleware(), function(req, res, next){
-    res.render('characters/add')
-})
+    res.render('characters/add');
+});
 
 // Add character SQL
-
 router.post('/add', authenticationMiddleware(), function(req, res, next){
     req.assert('Name', 'Name is required').notEmpty()
     req.assert('Class', 'Class is Required').notEmpty()
@@ -78,9 +77,9 @@ router.post('/add', authenticationMiddleware(), function(req, res, next){
         errors.forEach(function(error) {
             error_msg += error_msg + '<br>'
         })
-        req.flash('error', error_msg)
+        req.flash('error', error_msg);
 
-        res.render('characters/add', {Name: req.body.Name, Class: req.body.Class, Level: req.body.Level, Race: req.body.Race})
+        res.render('characters/add', {Name: req.body.Name, Class: req.body.Class, Level: req.body.Level, Race: req.body.Race});
     }
 });
 
@@ -114,7 +113,7 @@ router.get('/view/(:id)', function(req,res,next){
         console.err(err);
         res.redirect('/characters');
     })
-})
+});
 
 // Add spells to character
 
@@ -125,10 +124,10 @@ router.get('/addSpellToCharacter/(:id)', authenticationMiddleware(), function(re
 
     connection.query('SELECT * FROM spells ORDER BY id', function(err, results){
         if(err){
-            req.flash('error', err)
-            res.redirect('/characters/view/(:id)')
+            req.flash('error', err);
+            res.redirect('/characters/view/(:id)');
         } else {
-            res.render('characters/addSpellToCharacter', {data:results,charId})
+            res.render('characters/addSpellToCharacter', {data:results,charId});
         }
     })
 })
@@ -148,15 +147,15 @@ router.post('/addSpellToCharacter/:charId', authenticationMiddleware(), function
 
     connection.query('INSERT INTO knownspells(knownSpell_id, spell_id) VALUES (' + char_Id + ',' + id + ')', function(err,result){
         if(err){
-            req.flash('error', err)
-            res.redirect('/view/' + char_Id)
+            req.flash('error', err);
+            res.redirect('/view/' + char_Id);
         } 
         else {
-            res.end()
-            res.render('/view/' + char_Id)
+            res.end();
+            res.render('/view/' + char_Id);
         }
-    })
-})
+    });
+});
 
 // Route to edit character
 
@@ -166,8 +165,8 @@ router.get('/edit/(:id)', authenticationMiddleware(), function(req, res, next){
         if(err) throw err
 
         if(rows.length <= 0) {
-            req.flash('error', 'Character not found')
-            res.redirect('/characters')
+            req.flash('error', 'Character not found');
+            res.redirect('/characters');
         } else {
             res.render('characters/edit', {
                 id: rows[0].id,
@@ -201,7 +200,7 @@ router.get('/edit/(:id)', authenticationMiddleware(), function(req, res, next){
                 ChaScore: rows[0].ChaScore,
                 ChaMod: rows[0].ChaMod,
                 ChaDesc: rows[0].ChaDesc
-            })
+            });
         }
     }) 
 });
@@ -252,7 +251,7 @@ router.post('/update/:id', authenticationMiddleware(), function(req, res, next){
 
         connection.query('UPDATE characters SET ? WHERE id = ' + req.params.id, character, function(err, result){
             if(err) {
-                req.flash('error', err)
+                req.flash('error', err);
                 res.render('characters/edit', {
                     id: req.params.id,
                     Name: req.body.Name,
@@ -285,7 +284,7 @@ router.post('/update/:id', authenticationMiddleware(), function(req, res, next){
                     ChaScore: req.body.ChaScore,
                     ChaMod: req.body.ChaMod,
                     ChaDesc: req.body.ChaDesc
-                })
+                });
             } else {
                 req.flash('success', 'Data updated!');
                 res.redirect('/characters');
@@ -295,8 +294,8 @@ router.post('/update/:id', authenticationMiddleware(), function(req, res, next){
         var error_msg = ''
         errors.forEach(function(error){
             error_msg += error.msg + '<br>'
-        })
-        req.flash('error', error_msg)
+        });
+        req.flash('error', error_msg);
         res.render('characters/edit', {
             id: req.params.id,
             Name: req.body.Name,
@@ -329,9 +328,9 @@ router.post('/update/:id', authenticationMiddleware(), function(req, res, next){
             ChaScore: req.body.ChaScore,
             ChaMod: req.body.ChaMod,
             ChaDesc: req.body.ChaDesc
-        })
+        });
     }
-})
+});
 
 // Delete record
 
@@ -340,14 +339,14 @@ router.get('/delete/(:id)', authenticationMiddleware(), function(req,res,next) {
 
     connection.query('DELETE FROM characters WHERE id = ' + req.param.id, character, function(err, result){
         if(err){
-            req.flash('error', err)
-            res.redirect('/characters')
+            req.flash('error', err);
+            res.redirect('/characters');
         } else {
-            req.flash('success', 'Character successfully deleted')
-            res.redirect('/characters')
+            req.flash('success', 'Character successfully deleted');
+            res.redirect('/characters');
         }
-    }) 
-})
+    });
+});
 
 function authenticationMiddleware(){
     return function(req, res, next){

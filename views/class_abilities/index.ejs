@@ -4,6 +4,7 @@
         <%- include('../partials/head'); -%>
         <link rel='stylesheet' href='/stylesheets/spell.css' />
     <header>
+        <%- include('../partials/messages'); -%>
         <%- include('../partials/navigation'); -%>
     </header>
 
@@ -30,10 +31,10 @@
                     <button class="accordion my-1 py-2">
                         <div class="row">
                             <div class="col-sm-4">
-                                <h5><%- data[i].name %></h5>
+                                <h5><%- data[i].class_type %></h5>
                             </div>
                             <div class="col-sm-1 offset-sm-4">
-                                <h5><%= data[i].type %></h5>
+                                <h5><%= data[i].class_name %></h5>
                             </div>
                             <div class="col-sm-1 offset-sm-2">
                                 <i class="fa fa-plus float-right py-auto"></i>
@@ -42,26 +43,7 @@
                     </button>
                     <div class="panel">
                         <dl class="row">
-                            <dd class="col-md-6"><b>Manifest:</b> <%= data[i].manifest %></dd>
-                            <dd class="col-md-6"><b>Mana:</b> <%= data[i].mana %></dd>
-                        </dl>
-                        <dl class="row">
-                            <dd class="col-md-6"><b>Glyphs:</b> <%= data[i].glyphs %></dd>
-                            <dd class="col-md-6"><b>Action:</b> <%= data[i].action %></dd>
-                        </dl>
-                        <dl class="row">
-                            <dd class="col-md-6"><b>Effect:</b> <%= data[i].spellEffect %></dd>
-                            <dd class="col-md-6"><b>Boon:</b> <%= data[i].boon %></dd>
-                        </dl>
-                    
-                        <dl class="row">
-                            <form action="/characters/addSpellToCharacter/<%= charId %>" method="POST" name="addSpellToCharacter">
-                                <div class="container">
-                                <input type="hidden" name="charId" value="<%= charId %>">
-                                <input type="hidden" name="id" value="<%= data[i].id %>">
-                                <button type="submit" class="btn btn-light mx-auto">Add Spell</button>
-                            </div>
-                            </form>
+                            <dd class="col-md-6"><%= data[i].description %></dd>
                         </dl>
                     </div>
                     

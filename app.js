@@ -21,6 +21,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var charactersRouter = require('./routes/characters');
 var spellsRouter = require('./routes/spells');
+var classRouter = require('./routes/class');
 var npcRouter = require('./routes/npc');
 
 
@@ -70,6 +71,7 @@ app.use('/users', usersRouter);
 app.use('/characters', charactersRouter);
 app.use('/spells', spellsRouter);
 app.use('/npc', npcRouter);
+app.use('/class', classRouter);
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
