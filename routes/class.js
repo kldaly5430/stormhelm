@@ -4,19 +4,19 @@ var connection = require('../db/db');
 
 // Get abilities index page
 router.get('/', function(req, res, next){
-    connection.query('SELECT * FROM class_abilities ORDERED BY id', function(err, results){
+    connection.query('SELECT * FROM class_abilities ORDER BY id', function(err, results){
         if(err){
             req.flash('error', err);
             res.render('class_abilities/index', {data:''});
         } else {
-            res.render('class_abilities/index', {data:results});
+            res.render('class_abilities/index', {title: 'Class Abilties', data:results});
         }
     });
 });
 
 // Get add ability page
 router.get('/add', authenticationMiddleware(), function(req, res, next){
-    res.render('class_abilities/addClass')
+    res.render('class_abilities/addClass');
 });
 
 // POST Add ability

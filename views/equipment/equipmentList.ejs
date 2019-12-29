@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="stylesheets/equipment.css">
+        <%- include('../partials/head'); -%>
+        <%- include('../partials/navigation'); -%>
+    </head>
+    <body>
+        <div class="container">
+            <div class="sidenav">
+                <button class="dropbtn">Equipment <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <input type="checkbox" name="weapons" id="chkWeapons" value="Weapons"><label for="chkWeapons">Weapons</label><br>
+                    <input type="checkbox" name="Armor" id="chkArmor" value="Armor"><label for="chkArmor">Armor</label>
+                </div>
+                <button class="dropbtn">Damage Type <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <input type="checkbox" name="Blunt" id="Blunt"><label for=""></label><br>
+                    <input type="checkbox" name="Piercing" id="Piercing"><label for=""></label><br>
+                    <input type="checkbox" name="Slashing" id="Slashing"><label for=""></label><br>
+                    <input type="checkbox" name="Crushing" id="Crushing"><label for=""></label>
+                </div>
+                <button class="dropbtn">Armor Material <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <input type="checkbox" name="Leather" id="Leather"><label for=""></label><br>
+                    <input type="checkbox" name="ScaleMail" id="ScaleMail"><label for=""></label><br>
+                    <input type="checkbox" name="ChainMail" id="ChainMail"><label for=""></label><br>
+                    <input type="checkbox" name="PlateMail" id="PlateMail"><label for=""></label>
+                </div>
+                <button class="dropbtn">Rarity <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <input type="checkbox" name="common" id="common"><label for=""></label><br>
+                    <input type="checkbox" name="uncommon" id="uncommon"><label for=""></label><br>
+                    <input type="checkbox" name="rare" id="rare"><label for=""></label><br>
+                    <input type="checkbox" name="legendary" id="legendary"><label for=""></label>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        var dropdown = document.getElementsByClassName("dropbtn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            console.log(i);
+            dropdown[i].addEventListener("click", function() {
+            // this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            console.log(this.nextElementSibling);
+            if(dropdownContent.style.display === "block" ) {
+                dropdownContent.style.display = "none" ;
+            } else {
+                dropdownContent.style.display = "block" ;
+            }
+        });
+    }
+    </script>
+</html>

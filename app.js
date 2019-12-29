@@ -23,6 +23,8 @@ var charactersRouter = require('./routes/characters');
 var spellsRouter = require('./routes/spells');
 var classRouter = require('./routes/class');
 var npcRouter = require('./routes/npc');
+var recapRouter = require('./routes/recap');
+var equipmentRouter = require('./routes/equipment');
 
 
 var app = express();
@@ -60,7 +62,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use(expressValidator());
+app.use(expressValidator({
+  customValidators: {
+    isValidDate: function(value){
+      if(!value.match(/^\d{2}-\d{2}-\d{4}$/))
+        return false;
+    }
+  }
+}));
 
 app.use(function(req, res, next){
   res.locals.isAuthenticated = req.isAuthenticated();
@@ -72,6 +81,8 @@ app.use('/characters', charactersRouter);
 app.use('/spells', spellsRouter);
 app.use('/npc', npcRouter);
 app.use('/class', classRouter);
+app.use('/recap', recapRouter);
+app.use('/equipment', equipmentRouter);
 
 passport.use(new LocalStrategy(
   function(username, password, done) {

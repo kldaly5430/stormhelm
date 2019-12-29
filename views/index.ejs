@@ -2,16 +2,78 @@
 <html lang="en">
   <head>
     <%- include('partials/head'); -%>
-<header>
-  <%- include('partials/navigation'); -%>
-</header>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/homePage.css">
+    <header>
+      <%- include('partials/navigation'); -%>
+    </header>
 
   </head>
   <body>
     
-    <div class="container-fluid" >
-      <h1><%= title %></h1>
-      <p>Welcome to <%= title %></p>
+    <div class="container my-3">
+      <div class="container col-lg-12" id="recap">
+        <div class="row">
+          <% if(recaps.length){ %>
+
+          <div class="col-md-8 border">
+            <h2>Recaps</h2>
+            <div class="row mb-0">
+              <div class="col-md-10">
+                <h3><%= recaps[recaps.length-1].title %></h3>
+              </div>
+              <div class="col-md-2">
+                <a href="/recap/view/<%= recaps[recaps.length-1].id%>">Read More</a>
+              </div>
+            </div>
+            <hr>
+            <p class="textTruncate"><%= recaps[recaps.length-1].recap %></p>
+          </div>
+          <% if(recaps.length-2 >= 0){ %>
+          <div class="col-md-4 border">
+            <p><%= recaps[recaps.length-2].date %></p>
+            <h5><%= recaps[recaps.length-2].title %></h5>
+            <hr>
+            <p class="textTruncate"><%= recaps[recaps.length-2].recap %></p>
+          </div>
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+      <div class="container border col-lg-6 my-5" id="npcs">
+        <table class="table table-striped my-auto">
+          <tr>
+            <td>
+              <b>Name</b>
+            </td>
+            <td>
+              <b>Race</b>
+            </td>
+            <td>
+              <b>Status</b>
+            </td>
+            <td></td>
+          </tr>
+
+          <% if(npcs.length){ 
+          for(var i = npcs.length-1; i > npcs.length-6; i--){ %>
+          <tr>
+            <td>
+              <p><%= npcs[i].name %></p>
+            </td>
+            <td>
+              <p><%= npcs[i].race %></p>
+            </td>
+            <td>
+              <p><%= npcs[i].status %></p>
+            </td>
+            <td>
+              <a href="/npc/view/<%= npcs[i].id %>">View</a>
+            </td>
+          </tr>
+          <% } %>
+          <% } %>
+        </table>
+      </div>
     </div>
   </body>
 </html>

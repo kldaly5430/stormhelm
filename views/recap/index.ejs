@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/stylesheets/sesRecap.css">
+        <%- include('../partials/head'); -%>
+        <header>
+            <%- include('../partials/navigation'); -%>
+        </header>
+    </head>
+    <body>
+        <%- include('../partials/messages'); -%>
+        <div class="container">
+            <div class="row">
+               <div class="col-md-10">
+                  <h1>Previously on Birthright...</h1> 
+               </div>
+               <div class="col-md-2 my-auto">
+                   <a href="recap/add" class="btn btn-primary mx-auto">Add Recap</a>
+               </div>
+            </div>
+            
+        <% if(data.length){ %>    
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <h3 class="card-title my-auto"><%= data[data.length-1].title %></h3>
+                            <hr>
+                            <p class="card-text recapBlock my-0"><%= data[data.length-1].recap %></p>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <%= data[data.length-1].date %>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+            <% for(var i = data.length-1; i >= 0; i--){ %>
+                    <div class="col-md-4">
+                        <div class="card" style="max-height: 250px;">
+                            <h5 class="card-title my-auto"><%= data[i].title %></h5>
+                            <hr class="mt-0">
+                            <p class="card-text textTruncate"><%= data[i].recap %></p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <%= data[i].date %>
+                                </div>
+                                <div class="col-md-4">
+                                    <button id="btnOverlay" name="<%= data[i].id %>">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+                </div> 
+            </div>
+
+            <!-- Summary overlay -->
+            <div class="overlay" id="summary">
+                <a href="javascript:void(0)" class="btnClose" onclick="closeSummary()">&times;</a>
+                <div class="container border">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <b id="overlayTitle"></b>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <p id="overlaySummary"></p>
+                    </div>
+                </div>
+            </div>
+    </body>
+    <script>
+        $(document).ready(function(){
+            $("#btnOverlay").click(function(e){
+                var id = document.getElementById("btnOverlay").getAttribute("name");
+                // console.log(id);
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: "/recap/",
+                    data: id,
+                    dataType: "json",
+                    success: function(msg){
+                        if(msg.success){
+                            console.log("success");
+                            document.getElementById("summary").style.display = "block";
+                        } else {
+                            alert("error");
+                        }
+                    }
+                });
+            });
+        });
+
+        function openSummary(i) {
+            
+
+        }
+
+        function closeSummary() {
+            document.getElementById("summary").style.display = "none";
+        }
+    </script>
+</html>

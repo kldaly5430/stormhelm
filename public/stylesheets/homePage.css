@@ -1,0 +1,9 @@
+.textTruncate {
+    -webkit-line-clamp: 8;
+    margin: 5px;
+    text-indent: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}

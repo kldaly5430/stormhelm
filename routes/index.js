@@ -1,14 +1,39 @@
 var express = require('express');
 var router = express.Router();
+var connection = require('../db/db');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+//Home page promise
+const queryWrapper = function(statement){
+  return new Promise(function(resolve, reject){
+    connection.query(statement, function(err, result){
+      if(err)
+        return reject(err);
+      resolve(result);
+    });
+  });
+};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // console.log(req.user);
   // console.log(req.isAuthenticated());
-  res.render('index', { title: 'Home' });
+  Promise.all([
+    queryWrapper('SELECT * FROM recap ORDER BY id'),
+    queryWrapper('SELECT * FROM npc ORDER BY id')
+  ])
+  .then(function([recaps, npcs]){
+    res.render('index', {
+      recaps,
+      npcs
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    res.redirect('/characters');
+  })
 });
 
 // Register page
